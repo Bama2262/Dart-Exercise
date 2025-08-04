@@ -2,21 +2,25 @@ import 'package:flutter/material.dart';
 import '../component/custom_textfield.dart';
 import '../controller/formula.dart';
 
-class PersegiPage extends StatefulWidget {
-  const PersegiPage({super.key});
+class BalokPage extends StatefulWidget {
+  const BalokPage({super.key});
 
   @override
-  State<PersegiPage> createState() => _PersegiPageState();
+  State<BalokPage> createState() => _BalokPageState();
 }
 
-class _PersegiPageState extends State<PersegiPage> {
-  final sisiController = TextEditingController();
+class _BalokPageState extends State<BalokPage> {
+  final panjangController = TextEditingController();
+  final lebarController = TextEditingController();
+  final tinggiController = TextEditingController();
   double hasil = 0;
 
-  void hitungLuas() {
-    double sisi = double.tryParse(sisiController.text) ?? 0;
+  void hitungVolume() {
+    double p = double.tryParse(panjangController.text) ?? 0;
+    double l = double.tryParse(lebarController.text) ?? 0;
+    double t = double.tryParse(tinggiController.text) ?? 0;
     setState(() {
-      hasil = GeometryFormula.luasPersegi(sisi);
+      hasil = GeometryFormula.volumeBalok(p, l, t);
     });
   }
 
@@ -25,7 +29,7 @@ class _PersegiPageState extends State<PersegiPage> {
     return Scaffold(
       backgroundColor: Colors.white,
       appBar: AppBar(
-        title: const Text('Luas Persegi', style: TextStyle(color: Colors.black, fontWeight: FontWeight.bold)),
+        title: const Text('Volume Balok', style: TextStyle(color: Colors.black, fontWeight: FontWeight.bold)),
         backgroundColor: Colors.white,
         elevation: 0,
         iconTheme: const IconThemeData(color: Colors.black),
@@ -34,10 +38,12 @@ class _PersegiPageState extends State<PersegiPage> {
         padding: const EdgeInsets.all(20.0),
         child: Column(
           children: [
-            CustomTextField(label: 'Sisi', controller: sisiController),
+            CustomTextField(label: 'Panjang', controller: panjangController),
+            CustomTextField(label: 'Lebar', controller: lebarController),
+            CustomTextField(label: 'Tinggi', controller: tinggiController),
             const SizedBox(height: 10),
             ElevatedButton(
-              onPressed: hitungLuas,
+              onPressed: hitungVolume,
               style: ElevatedButton.styleFrom(
                 backgroundColor: Colors.white,
                 foregroundColor: Colors.black,
@@ -50,7 +56,7 @@ class _PersegiPageState extends State<PersegiPage> {
               child: const Text('Hitung', style: TextStyle(fontWeight: FontWeight.bold)),
             ),
             const SizedBox(height: 20),
-            Text('Luas: $hasil', style: TextStyle(color: Colors.black, fontWeight: FontWeight.bold)),
+            Text('Volume: $hasil', style: TextStyle(color: Colors.black, fontWeight: FontWeight.bold)),
           ],
         ),
       ),

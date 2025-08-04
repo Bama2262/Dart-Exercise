@@ -1,24 +1,32 @@
 import 'package:flutter/material.dart';
 
 class CustomTextField extends StatelessWidget {
-  final String judul;
+  final String label;
   final TextEditingController controller;
 
-  const CustomTextField({
-    super.key,
-    required this.judul,
-    required this.controller,
-  });
+  CustomTextField({required this.label, required this.controller});
 
   @override
   Widget build(BuildContext context) {
-    return TextField(
-      controller: controller,
-      decoration: InputDecoration(
-        labelText: judul,
-        border: const OutlineInputBorder(),
+    return Padding(
+      padding: const EdgeInsets.symmetric(vertical: 8.0),
+      child: TextField(
+        keyboardType: TextInputType.number,
+        controller: controller,
+        decoration: InputDecoration(
+          labelText: label,
+          labelStyle: TextStyle(color: Colors.black, fontWeight: FontWeight.bold),
+          border: OutlineInputBorder(borderSide: BorderSide(color: Colors.black)),
+          enabledBorder: OutlineInputBorder(borderSide: BorderSide(color: Colors.black)),
+          focusedBorder: OutlineInputBorder(borderSide: BorderSide(color: Colors.black, width: 2)),
+          errorBorder: OutlineInputBorder(borderSide: BorderSide(color: Colors.black)),
+          focusedErrorBorder: OutlineInputBorder(borderSide: BorderSide(color: Colors.black)),
+          filled: true,
+          fillColor: Colors.white,
+        ),
+        style: TextStyle(color: Colors.black, fontWeight: FontWeight.bold),
+        cursorColor: Colors.black,
       ),
-      keyboardType: TextInputType.number,
     );
   }
 }
